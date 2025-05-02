@@ -1,0 +1,61 @@
+package io.SousaLJ.playersafelogin.commands;
+
+import com.mojang.brigadier.Command;
+import com.mojang.brigadier.CommandDispatcher;
+import com.mojang.brigadier.arguments.StringArgumentType;
+import com.mojang.brigadier.context.CommandContext;
+import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import io.SousaLJ.playersafelogin.PlayerSafeLogin;
+import io.SousaLJ.playersafelogin.util.UserCacheReader;
+import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.commands.Commands;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
+
+import java.util.List;
+import java.util.function.Supplier;
+
+public class DeletePlayerAccount implements Command<CommandSourceStack> {
+
+
+    public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
+        dispatcher.register(
+                Commands.literal("playersafelogin")
+                        .then(Commands.literal("deleteaccount")
+                                .requires(source -> source.hasPermission(2)
+                                        && source.getEntity() instanceof ServerPlayer player
+                                        && player.hasPermissions(2))
+                                .then(Commands.argument("playerName", StringArgumentType.string())
+                                        .suggests((context, builder) -> {
+                                            final List<String> nomes = UserCacheReader.getCachedPlayerNames();
+                                            for (String nome : nomes) {
+                                                if (nome.toLowerCase().startsWith(builder.getRemaining().toLowerCase())) {
+                                                    builder.suggest(nome);
+                                                }
+                                            }
+                                            return builder.buildFuture();
+                                        })
+                                        .executes(new DeletePlayerAccount())
+                                )
+                        )
+        );
+    }
+
+
+    /**
+     * Deleta o regitro de senha do player em caso de perda de senha.
+     */
+    @Override
+    public int run(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
+        String PlayerName = context.getArgument("playerName", String.class);
+        ServerPlayer player = context.getSource().getServer().getPlayerList().getPlayerByName(PlayerName);
+        if (player == null) {
+            context.getSource().sendFailure(Component.translatable("playersafelogin.command.delete_account.player_not_found"));
+            return 0;
+        } else {
+            PlayerSafeLogin.getStorage().resetPassword(player.getUUID());
+            context.getSource().sendSystemMessage(Component.translatable("playersafelogin.command.delete_account.success"));
+            return 1;
+        }
+    }
+}

@@ -1,0 +1,17 @@
+{
+  "playersafelogin.gui.setup_title": "Configurar",
+  "playersafelogin.gui.new_password": "Nova Senha",
+  "playersafelogin.gui.master_password": "Senha Mestre",
+  "playersafelogin.gui.confirm": "Confirmar Senha",
+  "playersafelogin.gui.unlock": "Desbloquear",
+  "playersafelogin.gui.random_password": "Aleatória",
+  "playersafelogin.gui.save_password": "Salvar Senha",
+  "playersafelogin.kick.invalid_password": "Senha inválida! Contate o administrador do servidor.",
+  "playersafelogin.gui.login_title": "Login Seguro do Jogador",
+  "playersafelogin.gui.login_subtitle": "Digite sua senha ou use uma aleatória para proteger sua conta.",
+  "playersafelogin.command.reset_password.not_player": "Você deve ser um jogador para usar este comando.",
+  "playersafelogin.command.delete_account.player_not_found": "Jogador não encontrado.",
+  "playersafelogin.command.delete_account.success": "Registro do jogador deletado com sucesso.",
+  "playersafelogin.command.reset_password.success": "Senha redefinida com sucesso.",
+  "playersafelogin.gui.invalid_password_hash": "Hash de senha inválido. Por favor, contate o administrador do servidor."
+}
