@@ -48,9 +48,9 @@ public class PasswordScreen extends Screen {
 
         this.passwordField.setBordered(true);
         this.passwordField.setEditable(true);
-        passwordField.setMaxLength(SecurityConstants.MAX_PASSWORD_LENGTH);
-        passwordField.setFilter((p) -> p.length() <= SecurityConstants.MAX_PASSWORD_LENGTH);
-        this.passwordField.setResponder((p) -> proceedButton.active = !p.isEmpty());
+        this.passwordField.setMaxLength(SecurityConstants.MAX_PASSWORD_LENGTH);
+        this.passwordField.setFilter((p) -> p.length() <= SecurityConstants.MAX_PASSWORD_LENGTH);
+        this.passwordField.setResponder((p) -> proceedButton.active = isPasswordValid(p));
         addRenderableWidget(passwordField);
 
         this.randomPasswordButton = Button.builder(
@@ -66,6 +66,9 @@ public class PasswordScreen extends Screen {
                 Component.translatable("playersafelogin.gui.save_password"),
                 this::onProceed
         ).pos(this.width/2 - 80, this.height/2 + 10).size(100, 20).build();
+
+        proceedButton.active = false; // Desabilita o botão inicialmente
+
         addRenderableWidget(proceedButton);
     }
 
@@ -92,8 +95,10 @@ public class PasswordScreen extends Screen {
 
         int textY = logoY + LOGO_HEIGHT - 5;
         gui.drawCenteredString(this.font, subtitle, this.width / 2, textY, 0xFFA500); // laranja
+    }
 
-        // Título original (opcional manter)
-        // gui.drawCenteredString(font, title, width/2, height/2 - 50, 0xFFFFFF);
+    private boolean isPasswordValid(String password) {
+        return password.length() >= SecurityConstants.MIN_PASSWORD_LENGTH &&
+                password.length() <= SecurityConstants.MAX_PASSWORD_LENGTH;
     }
 }

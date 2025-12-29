@@ -8,7 +8,7 @@
   "playersafelogin.gui.save_password" : "Save Password",
   "playersafelogin.kick.invalid_password" : "Invalid password! Contact the server administrator.",
   "playersafelogin.gui.login_title": "Player Safe Login",
-  "playersafelogin.gui.login_subtitle": "Enter your password or use a random one to protect your account.",
+  "playersafelogin.gui.login_subtitle": "Type or use a random password. (min. 8 ch; max. 32)",
   "playersafelogin.command.reset_password.not_player" : "You must be a player to use this command.",
   "playersafelogin.command.delete_account.player_not_found" : "Player not found.",
   "playersafelogin.command.delete_account.success" : "Player register deleted successfully.",

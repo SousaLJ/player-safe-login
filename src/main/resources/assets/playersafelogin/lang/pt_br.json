@@ -8,7 +8,7 @@
   "playersafelogin.gui.save_password": "Salvar Senha",
   "playersafelogin.kick.invalid_password": "Senha inválida! Contate o administrador do servidor.",
   "playersafelogin.gui.login_title": "Login Seguro do Jogador",
-  "playersafelogin.gui.login_subtitle": "Digite sua senha ou use uma aleatória para proteger sua conta.",
+  "playersafelogin.gui.login_subtitle": "Digite ou use uma senha aleatória. (min. 8 ; max. 32).",
   "playersafelogin.command.reset_password.not_player": "Você deve ser um jogador para usar este comando.",
   "playersafelogin.command.delete_account.player_not_found": "Jogador não encontrado.",
   "playersafelogin.command.delete_account.success": "Registro do jogador deletado com sucesso.",
